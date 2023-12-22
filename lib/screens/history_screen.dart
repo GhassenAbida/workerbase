@@ -1,67 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:workerbase/models/scan_history.dart';
-import 'package:workerbase/services/storage_service.dart';
+import 'package:provider/provider.dart';
+import 'package:workerbase/providers/scan_history_provider.dart'; // Adjust this path to where your provider is located
 
-class ScanHistoryScreen extends StatefulWidget {
+class ScanHistoryScreen extends StatelessWidget {
   const ScanHistoryScreen({super.key});
-
-  @override
-  State<ScanHistoryScreen> createState() => _ScanHistoryScreenState();
-}
-
-class _ScanHistoryScreenState extends State<ScanHistoryScreen> {
-  List<QRScan> scans = [];
-  int currentPage = 0;
-  static const int pageSize = 10;
-
-  @override
-  void initState() {
-    super.initState();
-    _loadScans();
-  }
-
-  _loadScans({int page = 0}) async {
-    List<QRScan> loadedScans = await DatabaseHelper.instance.getPaginatedScans(page * pageSize, pageSize);
-    setState(() {
-      if (loadedScans.isEmpty && page != 0) {
-        currentPage = page - 1;
-      } else {
-        scans = loadedScans;
-        currentPage = page;
-      }
-    });
-  }
-
-  Future<void> _deleteScan(DateTime timestamp) async {
-    await DatabaseHelper.instance.deleteScanByTimestamp(timestamp);
-    _loadScans(page: currentPage);
-  }
-
-  Future<void> _promptDeleteScan(DateTime timestamp) async {
-    final result = await showDialog<bool>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Confirm Delete'),
-          content: const Text('Are you sure you want to delete this scan?'),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Cancel'),
-              onPressed: () => Navigator.of(context).pop(false),
-            ),
-            TextButton(
-              child: const Text('Delete'),
-              onPressed: () => Navigator.of(context).pop(true),
-            ),
-          ],
-        );
-      },
-    );
-
-    if (result == true) {
-      _deleteScan(timestamp);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,42 +11,64 @@ class _ScanHistoryScreenState extends State<ScanHistoryScreen> {
       appBar: AppBar(
         title: const Text('Scan History'),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: scans.isNotEmpty
-                ? ListView.builder(
-              itemCount: scans.length,
-              itemBuilder: (context, index) {
-                final scan = scans[index];
-                return ListTile(
-                  title: Text(scan.content),
-                  subtitle: Text(scan.timestamp.toString()),
-                  trailing: IconButton(
-                    icon: const Icon(Icons.delete, color: Colors.red),
-                    onPressed: () => _promptDeleteScan(scan.timestamp),
+      body: ChangeNotifierProvider<ScanHistoryProvider>(
+        create: (_) => ScanHistoryProvider(),
+        child: Consumer<ScanHistoryProvider>(
+          builder: (context, provider, child) {
+            return Column(
+              children: [
+                Expanded(
+                  child: provider.isLoading
+                      ? const Center(child: CircularProgressIndicator())
+                      : provider.scans.isEmpty
+                      ? const Center(child: Text("No scans available"))
+                      : ListView.builder(
+                    itemCount: provider.scans.length,
+                    itemBuilder: (context, index) {
+                      final scan = provider.scans[index];
+                      return ListTile(
+                        title: Text(scan.content),
+                        subtitle: Text(scan.timestamp.toString()),
+                        trailing: IconButton(
+                          icon: const Icon(Icons.delete, color: Colors.red),
+                          onPressed: () => provider.promptDeleteScan(context, scan.timestamp),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            )
-                : const Center(child: Text("No scans available")),
-          ),
-          _buildPaginationControls(),
-        ],
+                ),
+                _buildPaginationControls(context),
+              ],
+            );
+          },
+        ),
       ),
     );
   }
 
-
-  Widget _buildPaginationControls() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: List.generate(5, (index) {
-        return TextButton(
-          onPressed: () => _loadScans(page: index),
-          child: Text('${index * pageSize}'),
+  Widget _buildPaginationControls(BuildContext context) {
+    return Consumer<ScanHistoryProvider>(
+      builder: (context, provider, child) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: List.generate(5, (index) {
+            bool isCurrentPage = index == provider.currentPage;
+            return TextButton(
+              onPressed: () => provider.loadScans(page: index),
+              child: Text(
+                'Page ${index + 1}',
+                style: TextStyle(
+                  color: isCurrentPage ? Colors.blue : Colors.black,
+                  fontWeight: isCurrentPage ? FontWeight.bold : FontWeight.normal,
+                ),
+              ),
+              style: TextButton.styleFrom(
+                backgroundColor: isCurrentPage ? Colors.grey[300] : Colors.transparent,
+              ),
+            );
+          }),
         );
-      }),
+      },
     );
   }
 }
