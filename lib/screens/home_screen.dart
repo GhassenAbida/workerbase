@@ -159,7 +159,7 @@ class _QRScannerState extends State<QRScanner> {
                                   ),
                                 ),
                               ),
-                            const  Center(
+                              const  Center(
                                 child: const Icon(
                                   Icons.qr_code_scanner,
                                   size: 100,
