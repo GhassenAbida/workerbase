@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:workerbase/providers/scan_history_provider.dart'; // Adjust this path to where your provider is located
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:workerbase/utils/colors.dart';
 class ScanHistoryScreen extends StatelessWidget {
   const ScanHistoryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: greyColor,
       appBar: AppBar(
-        backgroundColor: Colors.red[100],
+        backgroundColor: redColor,
         title: const Text('Scan History',style: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.bold,
@@ -115,7 +116,7 @@ class ScanHistoryScreen extends StatelessWidget {
               child: Text(
                 'Page ${index + 1}',
                 style: TextStyle(
-                  color: isCurrentPage ? Colors.red[100] : Colors.black,
+                  color: isCurrentPage ? redColor : Colors.black,
                   fontWeight: isCurrentPage ? FontWeight.bold : FontWeight.normal,
                 ),
               ),

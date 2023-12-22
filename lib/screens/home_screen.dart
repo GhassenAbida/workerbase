@@ -39,7 +39,7 @@ class _QRScannerState extends State<QRScanner> {
     }
 
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: greyColor,
       appBar: AppBar(
           backgroundColor: Colors.red[100],
         actions: [
