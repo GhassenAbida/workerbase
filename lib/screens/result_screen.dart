@@ -4,11 +4,10 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:workerbase/providers/scan_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:workerbase/utils/colors.dart';
-<<<<<<< HEAD
-=======
+
 import 'package:fluttertoast/fluttertoast.dart';
 
->>>>>>> dev
+
 
 class ResultScreen extends StatelessWidget {
 

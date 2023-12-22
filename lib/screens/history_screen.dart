@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-<<<<<<< HEAD
+
 import 'package:workerbase/providers/scan_history_provider.dart';
 
-=======
+
 import 'package:workerbase/providers/scan_history_provider.dart'; // Adjust this path to where your provider is located
 import 'package:flutter_spinkit/flutter_spinkit.dart';
->>>>>>> dev
+
 class ScanHistoryScreen extends StatelessWidget {
   const ScanHistoryScreen({super.key});
 
@@ -115,11 +115,11 @@ class ScanHistoryScreen extends StatelessWidget {
             return TextButton(
               onPressed: () => provider.loadScans(page: index),
               style: TextButton.styleFrom(
-<<<<<<< HEAD
+
                 backgroundColor: isCurrentPage ? Colors.grey[300] : Colors.transparent,
-=======
-                backgroundColor: isCurrentPage ? Colors.grey[100] : Colors.transparent,
->>>>>>> dev
+
+
+
               ),
               child: Text(
                 'Page ${index + 1}',
