@@ -99,7 +99,7 @@ class _QRScannerState extends State<QRScanner> {
                     "Scanning will be started automatically",
                     style: TextStyle(
                       fontSize: 16,
-                      color: Colors.black54,
+                      color: lightBlackColor,
                     ),
                   ),
                   Expanded(
@@ -151,7 +151,7 @@ class _QRScannerState extends State<QRScanner> {
                             'Hold the QR code inside the area',
                             style: TextStyle(
                               color: Colors.white,
-                              backgroundColor: Colors.black54,
+                              backgroundColor: lightBlackColor,
                               fontSize: 16,
                             ),
                           ),
