@@ -22,6 +22,7 @@ QRScan _$QRScanFromJson(Map<String, dynamic> json) {
 mixin _$QRScan {
   String get content => throw _privateConstructorUsedError;
   DateTime get timestamp => throw _privateConstructorUsedError;
+  String get image => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -33,7 +34,7 @@ abstract class $QRScanCopyWith<$Res> {
   factory $QRScanCopyWith(QRScan value, $Res Function(QRScan) then) =
       _$QRScanCopyWithImpl<$Res, QRScan>;
   @useResult
-  $Res call({String content, DateTime timestamp});
+  $Res call({String content, DateTime timestamp, String image});
 }
 
 /// @nodoc
@@ -51,6 +52,7 @@ class _$QRScanCopyWithImpl<$Res, $Val extends QRScan>
   $Res call({
     Object? content = null,
     Object? timestamp = null,
+    Object? image = null,
   }) {
     return _then(_value.copyWith(
       content: null == content
@@ -61,6 +63,10 @@ class _$QRScanCopyWithImpl<$Res, $Val extends QRScan>
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -72,7 +78,7 @@ abstract class _$$QRScanImplCopyWith<$Res> implements $QRScanCopyWith<$Res> {
       __$$QRScanImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String content, DateTime timestamp});
+  $Res call({String content, DateTime timestamp, String image});
 }
 
 /// @nodoc
@@ -88,6 +94,7 @@ class __$$QRScanImplCopyWithImpl<$Res>
   $Res call({
     Object? content = null,
     Object? timestamp = null,
+    Object? image = null,
   }) {
     return _then(_$QRScanImpl(
       content: null == content
@@ -98,6 +105,10 @@ class __$$QRScanImplCopyWithImpl<$Res>
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -105,7 +116,8 @@ class __$$QRScanImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$QRScanImpl implements _QRScan {
-  const _$QRScanImpl({required this.content, required this.timestamp});
+  const _$QRScanImpl(
+      {required this.content, required this.timestamp, required this.image});
 
   factory _$QRScanImpl.fromJson(Map<String, dynamic> json) =>
       _$$QRScanImplFromJson(json);
@@ -114,10 +126,12 @@ class _$QRScanImpl implements _QRScan {
   final String content;
   @override
   final DateTime timestamp;
+  @override
+  final String image;
 
   @override
   String toString() {
-    return 'QRScan(content: $content, timestamp: $timestamp)';
+    return 'QRScan(content: $content, timestamp: $timestamp, image: $image)';
   }
 
   @override
@@ -127,12 +141,13 @@ class _$QRScanImpl implements _QRScan {
             other is _$QRScanImpl &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.timestamp, timestamp) ||
-                other.timestamp == timestamp));
+                other.timestamp == timestamp) &&
+            (identical(other.image, image) || other.image == image));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, content, timestamp);
+  int get hashCode => Object.hash(runtimeType, content, timestamp, image);
 
   @JsonKey(ignore: true)
   @override
@@ -151,7 +166,8 @@ class _$QRScanImpl implements _QRScan {
 abstract class _QRScan implements QRScan {
   const factory _QRScan(
       {required final String content,
-      required final DateTime timestamp}) = _$QRScanImpl;
+      required final DateTime timestamp,
+      required final String image}) = _$QRScanImpl;
 
   factory _QRScan.fromJson(Map<String, dynamic> json) = _$QRScanImpl.fromJson;
 
@@ -159,6 +175,8 @@ abstract class _QRScan implements QRScan {
   String get content;
   @override
   DateTime get timestamp;
+  @override
+  String get image;
   @override
   @JsonKey(ignore: true)
   _$$QRScanImplCopyWith<_$QRScanImpl> get copyWith =>

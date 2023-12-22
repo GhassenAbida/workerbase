@@ -11,11 +11,9 @@ void main() {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         routes: {
-          '/': (context) => QRScanner(),
-          '/history': (context) => ScanHistoryScreen(),
-          // Add other routes as needed
+          '/': (context) => const QRScanner(),
+          '/history': (context) =>const  ScanHistoryScreen(),
         },
-        // Other MaterialApp properties...
       ),
     ),
   );

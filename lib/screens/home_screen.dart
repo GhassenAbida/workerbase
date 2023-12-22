@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:workerbase/providers/scan_provider.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
-import 'package:workerbase/screens/history_screen.dart';
 import 'package:workerbase/services/qr_scanner_service.dart';
 import 'package:workerbase/utils/colors.dart';
 
@@ -112,11 +111,37 @@ class _QRScannerState extends State<QRScanner> {
                           onDetect: (barcodeCapture) {
                             if (barcodeCapture.barcodes.isNotEmpty && !qrScannerProvider.isScanCompleted) {
                               final String code = barcodeCapture.barcodes.first.rawValue ?? '---';
+                              // TODO: Add actual image handling logic here
+                              String imagePlaceholder = 'path/to/qr/code/image';  // Placeholder for image path
                               controller.stop(); // Stop the camera
-                              QRService().handleScan(context, code, qrScannerProvider);
+                              QRService().handleScan(context, code, imagePlaceholder, qrScannerProvider); // Now passing image as well
                             }
                           },
                         ),
+
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    flex: 4,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        // Inside the onDetect of MobileScanner
+                        MobileScanner(
+                          controller: controller,
+                          onDetect: (barcodeCapture) {
+                            if (barcodeCapture.barcodes.isNotEmpty && !qrScannerProvider.isScanCompleted) {
+                              final String code = barcodeCapture.barcodes.first.rawValue ?? '---';
+                              String imagePlaceholder = 'path/to/qr/code/image';  // Placeholder for image path
+
+                              // Stop the camera and handle the scan
+                              controller.stop();
+                              QRService().handleScan(context, code, imagePlaceholder, qrScannerProvider);
+                            }
+                          },
+                        ),
+
                         // Scanner frame
                         Container(
                           width: 250,
@@ -134,8 +159,8 @@ class _QRScannerState extends State<QRScanner> {
                                   ),
                                 ),
                               ),
-                              Center(
-                                child: Icon(
+                            const  Center(
+                                child: const Icon(
                                   Icons.qr_code_scanner,
                                   size: 100,
                                   color: Colors.grey,

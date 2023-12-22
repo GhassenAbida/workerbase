@@ -1,6 +1,6 @@
 import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
-import 'package:workerbase/models/scan_history.dart'; // Replace with your QRScan model path
+import 'package:path/path.dart' ;
+import 'package:workerbase/models/scan_history.dart';
 
 class DatabaseHelper {
   static const String _databaseName = "qr_scanner.db";
@@ -75,7 +75,7 @@ class DatabaseHelper {
     await db.delete(
       tableScans,
       where: '$columnTimestamp = ?', // Use the column name for timestamp
-      whereArgs: [timestamp.toIso8601String()], // Ensure the format matches what's stored in the database
+      whereArgs: [timestamp.toIso8601String()],
     );
   }
 }

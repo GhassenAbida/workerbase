@@ -23,7 +23,7 @@ class ScanHistoryProvider with ChangeNotifier {
       currentPage = page;   // Update currentPage to the requested page
     } catch (e) {
       // Handle errors, possibly setting an error state or logging the error
-      print('Error loading scans: $e');  // Consider a better error handling strategy
+      print('Error loading scans: $e');
     } finally {
       isLoading = false;
       notifyListeners();

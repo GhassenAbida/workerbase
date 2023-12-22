@@ -6,8 +6,9 @@ import 'package:workerbase/providers/scan_provider.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 class QRService {
-  void handleScan(BuildContext context, String code, QRScannerProvider provider) async {
-    final newScan = QRScan(content: code, timestamp: DateTime.now());
+  void handleScan(BuildContext context, String code, String image, QRScannerProvider provider) async {
+    // Assume 'image' is a String representing the image (e.g., a URL or file path)
+    final newScan = QRScan(content: code, timestamp: DateTime.now(), image: image);
     await DatabaseHelper.instance.insertScan(newScan);
 
     provider.completeScan(code);
