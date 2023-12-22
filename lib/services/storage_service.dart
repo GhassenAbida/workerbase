@@ -1,5 +1,9 @@
 import 'package:sqflite/sqflite.dart';
+<<<<<<< HEAD
 import 'package:path/path.dart' ;
+=======
+import 'package:path/path.dart';
+>>>>>>> dev
 import 'package:workerbase/models/scan_history.dart';
 
 class DatabaseHelper {

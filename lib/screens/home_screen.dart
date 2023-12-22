@@ -39,8 +39,9 @@ class _QRScannerState extends State<QRScanner> {
     }
 
     return Scaffold(
-      backgroundColor: bgColor,
+      backgroundColor: Colors.grey[200],
       appBar: AppBar(
+          backgroundColor: Colors.red[100],
         actions: [
           IconButton(
             icon: const Icon(Icons.history, color: blackColor),
@@ -68,7 +69,7 @@ class _QRScannerState extends State<QRScanner> {
           "QRScanner",
           style: TextStyle(
             color: blackColor,
-            fontSize: 18,
+            fontSize: 16,
             fontWeight: FontWeight.bold,
             letterSpacing: 1,
           ),
@@ -85,10 +86,10 @@ class _QRScannerState extends State<QRScanner> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    "Place the QR code in the area",
+                    "Place the QR code here",
                     style: TextStyle(
                       color: blackColor,
-                      fontSize: 18,
+                      fontSize: 16,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 1,
                     ),
@@ -97,7 +98,7 @@ class _QRScannerState extends State<QRScanner> {
                   const Text(
                     "Scanning will be started automatically",
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 15,
                       color: lightBlackColor,
                     ),
                   ),
@@ -159,8 +160,13 @@ class _QRScannerState extends State<QRScanner> {
                                   ),
                                 ),
                               ),
+<<<<<<< HEAD
                               const  Center(
                                 child: const Icon(
+=======
+                              const Center(
+                                child:const Icon(
+>>>>>>> dev
                                   Icons.qr_code_scanner,
                                   size: 100,
                                   color: Colors.grey,
@@ -187,11 +193,11 @@ class _QRScannerState extends State<QRScanner> {
                   Expanded(
                     child: Container(
                       alignment: Alignment.center,
-                      child: const Text(
+                      child:  Text(
                         "WorkerBase",
                         style: TextStyle(
-                          color: blackColor,
-                          fontSize: 14,
+                          color: Colors.red[100],
+                          fontSize: 16,
                           fontWeight: FontWeight.bold,
                           letterSpacing: 1,
                         ),

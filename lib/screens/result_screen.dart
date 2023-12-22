@@ -4,6 +4,11 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:workerbase/providers/scan_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:workerbase/utils/colors.dart';
+<<<<<<< HEAD
+=======
+import 'package:fluttertoast/fluttertoast.dart';
+
+>>>>>>> dev
 
 class ResultScreen extends StatelessWidget {
 
@@ -53,24 +58,36 @@ class ResultScreen extends StatelessWidget {
               fontWeight:FontWeight.bold,
               letterSpacing:1),),
         const SizedBox(height: 10,),
-          SizedBox(
-            width: MediaQuery.of(context).size.width-100,
-            height:48,
-            child: ElevatedButton(
-              style:ElevatedButton.styleFrom(backgroundColor: Colors.blue),
-                onPressed: (){
-              Clipboard.setData(ClipboardData(text:code));
+        SizedBox(
+          width: MediaQuery.of(context).size.width - 100,
+          height: 48,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
+            onPressed: () async {
+              await Clipboard.setData(ClipboardData(text: code));
+              // Show a toast message
+              Fluttertoast.showToast(
+                  msg: "Copied to Clipboard",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM,  // Change this if you want the toast to appear elsewhere
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.grey[800],  // Change this for different toast background color
+                  textColor: Colors.white,  // Change this for different text color
+                  fontSize: 16.0
+              );
             },
-
-              child:
-            const Text("COPY ",style:TextStyle(
-                color:Colors.white,
-                fontSize:18,
-                fontWeight:FontWeight.bold,
-                letterSpacing:1),),
+            child: const Text(
+              "COPY",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1,
+              ),
             ),
-          ),],
-      )),
+          ),
+        ),
+      ],),),
     );
   }
 }
