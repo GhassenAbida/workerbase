@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workerbase/models/scan_history.dart';
 import 'package:workerbase/services/storage_service.dart';
-
+import 'package:fluttertoast/fluttertoast.dart';
 class ScanHistoryProvider with ChangeNotifier {
   List<QRScan> scans = [];
   int currentPage = 0;
@@ -52,10 +52,20 @@ class ScanHistoryProvider with ChangeNotifier {
             ),
             TextButton(
               child: const Text('Delete'),
-              onPressed: () => Navigator.of(context).pop(true),
+              onPressed: (){Navigator.of(context).pop(true);
+                Fluttertoast.showToast(
+                    msg: "Element was deleted",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.CENTER,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.red[100],
+                    textColor: Colors.white,
+                    fontSize: 16.0
+                );},
             ),
           ],
         );
+
       },
     );
 

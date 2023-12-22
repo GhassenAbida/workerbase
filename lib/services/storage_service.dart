@@ -1,6 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-import 'package:workerbase/models/scan_history.dart'; // Replace with your QRScan model path
+import 'package:workerbase/models/scan_history.dart';
 
 class DatabaseHelper {
   static const String _databaseName = "qr_scanner.db";
