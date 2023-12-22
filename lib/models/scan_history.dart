@@ -5,7 +5,9 @@ part 'scan_history.g.dart'; // For JSON serialization
 
 @freezed
 class QRScan with _$QRScan {
+
   const factory QRScan({
+
     required String content,
     required DateTime timestamp,
   }) = _QRScan;

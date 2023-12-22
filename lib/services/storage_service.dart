@@ -70,12 +70,12 @@ class DatabaseHelper {
     Database db = await database;
     await db.delete(tableScans);
   }
-  Future<void> deleteScan(int id) async {
+  Future<void> deleteScanByTimestamp(DateTime timestamp) async {
     Database db = await database;
     await db.delete(
       tableScans,
-      where: '$columnId = ?',
-      whereArgs: [id],
+      where: '$columnTimestamp = ?', // Use the column name for timestamp
+      whereArgs: [timestamp.toIso8601String()], // Ensure the format matches what's stored in the database
     );
   }
 }

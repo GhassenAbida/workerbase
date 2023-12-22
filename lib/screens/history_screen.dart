@@ -32,12 +32,12 @@ class _ScanHistoryScreenState extends State<ScanHistoryScreen> {
     });
   }
 
-  Future<void> _deleteScan(int id) async {
-    await DatabaseHelper.instance.deleteScan(id);
+  Future<void> _deleteScan(DateTime timestamp) async {
+    await DatabaseHelper.instance.deleteScanByTimestamp(timestamp);
     _loadScans(page: currentPage);
   }
 
-  Future<void> _promptDeleteScan(int id) async {
+  Future<void> _promptDeleteScan(DateTime timestamp) async {
     final result = await showDialog<bool>(
       context: context,
       builder: (BuildContext context) {
@@ -59,7 +59,7 @@ class _ScanHistoryScreenState extends State<ScanHistoryScreen> {
     );
 
     if (result == true) {
-      _deleteScan(id);
+      _deleteScan(timestamp);
     }
   }
 
@@ -82,7 +82,7 @@ class _ScanHistoryScreenState extends State<ScanHistoryScreen> {
                   subtitle: Text(scan.timestamp.toString()),
                   trailing: IconButton(
                     icon: const Icon(Icons.delete, color: Colors.red),
-                    onPressed: () => _promptDeleteScan(scan),
+                    onPressed: () => _promptDeleteScan(scan.timestamp),
                   ),
                 );
               },
