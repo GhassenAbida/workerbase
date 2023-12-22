@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:workerbase/providers/scan_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:workerbase/utils/colors.dart';
 
 class ResultScreen extends StatelessWidget {
 
@@ -18,9 +19,9 @@ class ResultScreen extends StatelessWidget {
         leading:IconButton(onPressed: (){
           qrScannerProvider.resetScan();
           Navigator.pop(context);
-        },icon:const Icon(Icons.arrow_back),color:Colors.black54),
+        },icon:const Icon(Icons.arrow_back),color:lightBlackColor),
         title:const Text("QRScanner ",style:TextStyle(
-            color:Colors.black87,
+            color:blackColor,
             fontSize:18,
             fontWeight:FontWeight.bold,
             letterSpacing:1),),
@@ -39,7 +40,7 @@ class ResultScreen extends StatelessWidget {
           ),
 
           const Text("Scanned Result ",style:TextStyle(
-            color:Colors.black87,
+            color:blackColor,
             fontSize:18,
             fontWeight:FontWeight.bold,
             letterSpacing:1),),
@@ -47,7 +48,7 @@ class ResultScreen extends StatelessWidget {
           Text(code,
             textAlign:TextAlign.center,
             style:const TextStyle(
-              color:Colors.black87,
+              color:blackColor,
               fontSize:18,
               fontWeight:FontWeight.bold,
               letterSpacing:1),),
